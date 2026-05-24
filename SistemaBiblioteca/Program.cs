@@ -539,6 +539,178 @@ namespace SistemadeGestióndeBiblioteca
                 }
             } while (opcion != 4);
         }
+        static void GestióndePréstamos()
+        {
+            int opcion = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Gestión de Préstamos");
+                Console.WriteLine("1. Registrar nuevo préstamo");
+                Console.WriteLine("2. Registrar devolución de libro");
+                Console.WriteLine("3. Listado de préstamos activos");
+                Console.WriteLine("4. Buscar préstamo por carnet de usuario");
+                Console.WriteLine("5. Volver al menú principal");
+                Console.Write("Seleccione una opción: ");
+                opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Registrar Nuevo Préstamo");
+                        if (cantPrestamos >= prestamos.Length)
+                        {
+                            Console.WriteLine("No hay espacio para más préstamos.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        Console.Write("Carnet del usuario: ");
+                        string carnetP = Console.ReadLine();
+                        bool usuarioValido = false;
+                        bool usuarioActivo = false;
+                        for (int i = 0; i < cantUsuarios; i++)
+                        {
+                            if (usuarios[i].carnet == carnetP)
+                            {
+                                usuarioValido = true;
+                                if (usuarios[i].estado) usuarioActivo = true;
+                                break;
+                            }
+                        }
+                        if (!usuarioValido)
+                        {
+                            Console.WriteLine("Usuario no encontrado.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        if (!usuarioActivo)
+                        {
+                            Console.WriteLine("El usuario está inactivo y no puede realizar préstamos.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        Console.Write("Código del libro: ");
+                        string codigoP = Console.ReadLine();
+                        bool libroValido = false;
+                        int posLibro = -1;
+                        for (int i = 0; i < cantLibros; i++)
+                        {
+                            if (libros[i].codigo == codigoP)
+                            {
+                                libroValido = true;
+                                posLibro = i;
+                                break;
+                            }
+                        }
+                        if (!libroValido)
+                        {
+                            Console.WriteLine("Libro no encontrado.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        if (libros[posLibro].cantidadDeEjemplaresDisponibles <= 0)
+                        {
+                            Console.WriteLine("No hay ejemplares disponibles de este libro.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        prestamos[cantPrestamos].carneUsuario = carnetP;
+                        prestamos[cantPrestamos].codigoLibro = codigoP;
+                        prestamos[cantPrestamos].fechaPrestamo = LeerFecha("Fecha de préstamo (dd/mm/yyyy): ");
+                        prestamos[cantPrestamos].fechaDevolucionEstimada = LeerFecha("Fecha de devolución estimada (dd/mm/yyyy): ");
+                        prestamos[cantPrestamos].estado = "Activo";
+                        libros[posLibro].cantidadDeEjemplaresDisponibles--;
+                        cantPrestamos++;
+                        GuardarDatos();
+                        Console.WriteLine("Préstamo registrado exitosamente.");
+                        AbrirArchivo(dataArchivo + "prestamos.txt");
+                        Console.ReadKey();
+                        break;
+
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("Registrar Devolución");
+                        Console.Write("Carnet del usuario: ");
+                        string carnetDev = Console.ReadLine();
+                        Console.Write("Código del libro: ");
+                        string codigoDev = Console.ReadLine();
+                        bool devEncontrado = false;
+                        for (int i = 0; i < cantPrestamos; i++)
+                        {
+                            if (prestamos[i].carneUsuario == carnetDev &&
+                                prestamos[i].codigoLibro == codigoDev &&
+                                prestamos[i].estado == "Activo")
+                            {
+                                prestamos[i].estado = "Devuelto";
+                                for (int j = 0; j < cantLibros; j++)
+                                {
+                                    if (libros[j].codigo == codigoDev)
+                                    {
+                                        libros[j].cantidadDeEjemplaresDisponibles++;
+                                        break;
+                                    }
+                                }
+                                GuardarDatos();
+                                Console.WriteLine("Devolución registrada exitosamente.");
+                                AbrirArchivo(dataArchivo + "prestamos.txt");
+                                devEncontrado = true;
+                                break;
+                            }
+                        }
+                        if (!devEncontrado)
+                            Console.WriteLine("No se encontró un préstamo activo con esos datos.");
+                        Console.ReadKey();
+                        break;
+
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Préstamos Activos");
+                        bool hayActivos = false;
+                        for (int i = 0; i < cantPrestamos; i++)
+                        {
+                            if (prestamos[i].estado == "Activo")
+                            {
+                                Console.WriteLine("Carnet usuario:      " + prestamos[i].carneUsuario);
+                                Console.WriteLine("Código libro:        " + prestamos[i].codigoLibro);
+                                Console.WriteLine("Fecha préstamo:      " + prestamos[i].fechaPrestamo);
+                                Console.WriteLine("Fecha devolución:    " + prestamos[i].fechaDevolucionEstimada);
+                                Console.WriteLine("Estado:              " + prestamos[i].estado);
+                                hayActivos = true;
+                            }
+                        }
+                        if (!hayActivos) Console.WriteLine("No hay préstamos activos.");
+                        Console.ReadKey();
+                        break;
+
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Búsqueda de Préstamos por Carnet");
+                        Console.Write("Ingrese el carnet del usuario: ");
+                        string carnetBuscarP = Console.ReadLine();
+                        bool hayPrestamos = false;
+                        for (int i = 0; i < cantPrestamos; i++)
+                        {
+                            if (prestamos[i].carneUsuario == carnetBuscarP)
+                            {
+                                Console.WriteLine("Código libro:        " + prestamos[i].codigoLibro);
+                                Console.WriteLine("Fecha préstamo:      " + prestamos[i].fechaPrestamo);
+                                Console.WriteLine("Fecha devolución:    " + prestamos[i].fechaDevolucionEstimada);
+                                Console.WriteLine("Estado:              " + prestamos[i].estado);
+                                hayPrestamos = true;
+                            }
+                        }
+                        if (!hayPrestamos) Console.WriteLine("No se encontraron préstamos para ese carnet.");
+                        Console.ReadKey();
+                        break;
+
+                    case 5: break;
+                    default:
+                        Console.WriteLine("Opción no válida. Presione una tecla para continuar...");
+                        Console.ReadKey();
+                        break;
+                }
+            } while (opcion != 5);
+        }
     }
 
 }
