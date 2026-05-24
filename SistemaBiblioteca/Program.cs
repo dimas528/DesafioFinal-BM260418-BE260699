@@ -39,5 +39,35 @@ namespace SistemadeGestióndeBiblioteca
         static int cantLibros = 0;
         static int cantUsuarios = 0;
         static int cantPrestamos = 0;
+
+        static string LeerTexto(string etiqueta)
+        {
+            string valor;
+            do
+            {
+                Console.Write(etiqueta);
+                valor = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(valor))
+                    Console.WriteLine("El campo no puede estar vacío.");
+            } while (string.IsNullOrWhiteSpace(valor));
+            return valor;
+        }
+
+        static int LeerEntero(string etiqueta)
+        {
+            while (true)
+            {
+                Console.Write(etiqueta);
+                try
+                {
+                    return int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Ingrese un número entero válido.");
+                }
+            }
+        }
     }
+
 }
