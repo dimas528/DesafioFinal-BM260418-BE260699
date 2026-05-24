@@ -289,6 +289,36 @@ namespace SistemadeGestióndeBiblioteca
             }
             catch (Exception ex) { Console.WriteLine("Error al abrir archivo: " + ex.Message); }
         }
+        static void Main(string[] args)
+        {
+            CargarDatos();
+
+            int Opcion = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Biblioteca Universitaria");
+                Console.WriteLine("1. Gestión de Libros");
+                Console.WriteLine("2. Gestión de Usuarios");
+                Console.WriteLine("3. Gestión de Préstamos");
+                Console.WriteLine("4. Salir del Sistema");
+                Console.Write("Seleccione una opción: ");
+                Opcion = int.Parse(Console.ReadLine());
+                switch (Opcion)
+                {
+                    case 1: GestióndeLibros(); break;
+                    case 2: GestióndeUsuarios(); break;
+                    case 3: GestióndePréstamos(); break;
+                    case 4:
+                        GuardarDatos();
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Presione una tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                }
+            } while (Opcion != 4);
+        }
     }
 
 }
