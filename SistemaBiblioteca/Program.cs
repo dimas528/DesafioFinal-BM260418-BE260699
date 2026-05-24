@@ -381,7 +381,58 @@ namespace SistemadeGestióndeBiblioteca
                             Console.WriteLine("Libro no encontrado.");
                         Console.ReadKey();
                         break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Listado Completo de Libros");
+                        if (cantLibros == 0)
+                        {
+                            Console.WriteLine("No hay libros registrados.");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < cantLibros; i++)
+                            {
+                                Console.WriteLine("Código:       " + libros[i].codigo);
+                                Console.WriteLine("Título:       " + libros[i].titulo);
+                                Console.WriteLine("Autor:        " + libros[i].autor);
+                                Console.WriteLine("Editorial:    " + libros[i].editorial);
+                                Console.WriteLine("Año:          " + libros[i].añoDePublicacion);
+                                Console.WriteLine("Ejemplares:   " + libros[i].cantidadDeEjemplaresDisponibles);
+                            }
+                            Console.WriteLine("Total de libros: " + cantLibros);
+                        }
+                        Console.ReadKey();
+                        break;
 
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Eliminación de Libro");
+                        Console.Write("Ingrese el código del libro a eliminar: ");
+                        string codigoEliminar = Console.ReadLine();
+                        int posEliminar = -1;
+                        for (int i = 0; i < cantLibros; i++)
+                        {
+                            if (libros[i].codigo == codigoEliminar)
+                            {
+                                posEliminar = i;
+                                break;
+                            }
+                        }
+                        if (posEliminar == -1)
+                        {
+                            Console.WriteLine("Libro no encontrado.");
+                        }
+                        else
+                        {
+                            for (int i = posEliminar; i < cantLibros - 1; i++)
+                                libros[i] = libros[i + 1];
+                            cantLibros--;
+                            GuardarDatos();
+                            Console.WriteLine("Libro eliminado exitosamente.");
+                            AbrirArchivo(dataArchivo + "libros.csv");
+                        }
+                        Console.ReadKey();
+                        break;
                     case 5:
                         break;
                     default:
