@@ -442,6 +442,103 @@ namespace SistemadeGestióndeBiblioteca
                 }
             } while (opcion != 5);
         }
+        static void GestióndeUsuarios()
+        {
+            int opcion = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Gestión de Usuarios");
+                Console.WriteLine("1. Registro de nuevo usuario");
+                Console.WriteLine("2. Búsqueda de usuario por carnet");
+                Console.WriteLine("3. Listado completo de usuarios");
+                Console.WriteLine("4. Volver al menú principal");
+                Console.Write("Seleccione una opción: ");
+                opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Registro de Nuevo Usuario");
+                        if (cantUsuarios >= usuarios.Length)
+                        {
+                            Console.WriteLine("No hay espacio para más usuarios.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        usuarios[cantUsuarios].carnet = LeerCarnet("Carnet (8 dígitos): ");
+                        usuarios[cantUsuarios].nombreCompleto = LeerTexto("Nombre completo: ");
+                        usuarios[cantUsuarios].carrera = LeerTexto("Carrera: ");
+                        usuarios[cantUsuarios].correoElectronico = LeerCorreo("Correo electrónico: ");
+                        usuarios[cantUsuarios].telefono = LeerEntero("Teléfono: ");
+                        usuarios[cantUsuarios].estado = true;
+                        cantUsuarios++;
+                        GuardarDatos();
+                        Console.WriteLine("Usuario registrado exitosamente.");
+                        AbrirArchivo(dataArchivo + "usuarios.txt");
+                        Console.ReadKey();
+                        break;
+
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("Búsqueda de Usuario por Carnet");
+                        Console.Write("Ingrese el carnet: ");
+                        string carnetBuscar = Console.ReadLine();
+                        bool encontradoU = false;
+                        for (int i = 0; i < cantUsuarios; i++)
+                        {
+                            if (usuarios[i].carnet == carnetBuscar)
+                            {
+                                Console.WriteLine("----------------------------------------");
+                                Console.WriteLine("Carnet:   " + usuarios[i].carnet);
+                                Console.WriteLine("Nombre:   " + usuarios[i].nombreCompleto);
+                                Console.WriteLine("Carrera:  " + usuarios[i].carrera);
+                                Console.WriteLine("Correo:   " + usuarios[i].correoElectronico);
+                                Console.WriteLine("Teléfono: " + usuarios[i].telefono);
+                                Console.WriteLine("Estado:   " + (usuarios[i].estado ? "Activo" : "Inactivo"));
+                                Console.WriteLine("----------------------------------------");
+                                encontradoU = true;
+                                break;
+                            }
+                        }
+                        if (!encontradoU)
+                            Console.WriteLine("Usuario no encontrado.");
+                        Console.ReadKey();
+                        break;
+
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("Listado Completo de Usuarios");
+                        if (cantUsuarios == 0)
+                        {
+                            Console.WriteLine("No hay usuarios registrados.");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < cantUsuarios; i++)
+                            {
+                                Console.WriteLine("----------------------------------------");
+                                Console.WriteLine("Carnet:   " + usuarios[i].carnet);
+                                Console.WriteLine("Nombre:   " + usuarios[i].nombreCompleto);
+                                Console.WriteLine("Carrera:  " + usuarios[i].carrera);
+                                Console.WriteLine("Correo:   " + usuarios[i].correoElectronico);
+                                Console.WriteLine("Teléfono: " + usuarios[i].telefono);
+                                Console.WriteLine("Estado:   " + (usuarios[i].estado ? "Activo" : "Inactivo"));
+                            }
+                            Console.WriteLine("----------------------------------------");
+                            Console.WriteLine("Total de usuarios: " + cantUsuarios);
+                        }
+                        Console.ReadKey();
+                        break;
+
+                    case 4: break;
+                    default:
+                        Console.WriteLine("Opción no válida. Presione una tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                }
+            } while (opcion != 4);
+        }
     }
 
 }
