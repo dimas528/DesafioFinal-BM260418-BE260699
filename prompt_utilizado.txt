@@ -1,0 +1,76 @@
+================================================================
+PROMPT UTILIZADO – VERSIÓN IA
+Sistema Integral de Gestión de Biblioteca Universitaria
+Programación de Algoritmos – Desafío Final Ciclo I 2026
+================================================================
+
+PROMPT INGRESADO A LA HERRAMIENTA DE IA (Claude):
+
+---
+
+Desarrolla un sistema de consola en C# llamado "Sistema Integral de
+Gestión de Biblioteca Universitaria" para la Universidad Don Bosco.
+El sistema debe usar OBLIGATORIAMENTE las siguientes estructuras de
+programación:
+
+1. Estructuras de datos personalizadas (struct):
+   - Libro: código (string, 8 chars alfanuméricos ej. LIB00001),
+     título, autor, editorial, año de publicación (int, 1900-actual),
+     categoría, cantidad de ejemplares (int no negativo).
+   - Usuario: carné (string, 8 dígitos numéricos), nombre completo,
+     carrera, correo electrónico (con @ y punto posterior), teléfono,
+     estado (activo/inactivo).
+   - Prestamo: id, carné de usuario, código de libro, fecha de préstamo
+     (dd/mm/yyyy), fecha estimada de devolución (dd/mm/yyyy),
+     estado (activo/devuelto).
+
+2. Arreglos de structs (máximo: 10 libros, 5 usuarios, 10 préstamos).
+
+3. Una MATRIZ 2D para mostrar estadísticas de libros por categoría
+   (filas=categorías, columnas=con_ejemplares/sin_ejemplares/total).
+
+4. Estructuras de control obligatorias:
+   - Secuenciales en todos los módulos.
+   - if-else para validaciones y condiciones.
+   - switch-case para menús.
+   - for para recorrer arreglos y escribir archivos.
+   - while para leer archivos línea a línea.
+   - do-while para el ciclo principal del menú.
+
+5. Manejo de cadenas: búsqueda parcial por nombre, comparación,
+   ToUpper, ToLower, Contains, Split, IndexOf.
+
+6. Manejo de archivos:
+   - libros.csv (separador ;) en carpeta Data/.
+   - usuarios.txt (separador |) en carpeta Data/.
+   - prestamos.txt (separador |) en carpeta Data/.
+   - Carga automática al iniciar, guardado automático al salir.
+   - Exportar reporte de préstamos a reporte_prestamos.txt.
+
+7. Métodos (static) separados para cada funcionalidad:
+   validaciones, búsquedas, visualización, entrada de datos,
+   guardado/carga de archivos.
+
+8. Menú principal con submenús para:
+   - Módulo A: Gestión de Libros (registrar, buscar, listar, eliminar,
+     estadísticas con matriz).
+   - Módulo B: Gestión de Usuarios (registrar, buscar por carné,
+     buscar por nombre, listar, cambiar estado).
+   - Módulo C: Gestión de Préstamos (registrar, devolver, consultar
+     activos por usuario, actualizar estado, listar, exportar reporte).
+
+9. Manejo de excepciones con try-catch para entradas numéricas.
+
+10. Validaciones robustas en todos los campos obligatorios:
+    código libro 8 chars alfanuméricos, carné 8 dígitos, correo con @
+    y punto, año entre 1900 y año actual, fechas en formato dd/mm/yyyy,
+    campos no vacíos, cantidades no negativas.
+
+El programa debe ser aplicación de consola (.NET 6+), sin interfaz
+gráfica, bien comentado y con nombres descriptivos en español.
+
+---
+
+================================================================
+FIN DEL PROMPT
+================================================================

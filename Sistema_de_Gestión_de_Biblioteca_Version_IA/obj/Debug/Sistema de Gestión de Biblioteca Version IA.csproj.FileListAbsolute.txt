@@ -1,0 +1,7 @@
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\bin\Debug\Sistema de Gestión de Biblioteca Version IA.exe.config
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\bin\Debug\Sistema de Gestión de Biblioteca Version IA.exe
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\bin\Debug\Sistema de Gestión de Biblioteca Version IA.pdb
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\obj\Debug\Sistema de Gestión de Biblioteca Version IA.csproj.AssemblyReference.cache
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\obj\Debug\Sistema de Gestión de Biblioteca Version IA.csproj.CoreCompileInputs.cache
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\obj\Debug\Sistema de Gestión de Biblioteca Version IA.exe
+C:\Users\MINEDUCYT\Desktop\DesafioFinal-BM260418-BE260699\Sistema de Gestión de Biblioteca Version IA\obj\Debug\Sistema de Gestión de Biblioteca Version IA.pdb

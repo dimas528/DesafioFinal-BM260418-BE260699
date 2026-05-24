@@ -1,0 +1,7 @@
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\bin\Debug\SistemaBiblioteca.exe.config
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\bin\Debug\SistemaBiblioteca.exe
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\bin\Debug\SistemaBiblioteca.pdb
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\obj\Debug\SistemaBiblioteca.csproj.AssemblyReference.cache
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\obj\Debug\SistemaBiblioteca.csproj.CoreCompileInputs.cache
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\obj\Debug\SistemaBiblioteca.exe
+C:\Users\MINEDUCYT\Desktop\SistemaBiblioteca\obj\Debug\SistemaBiblioteca.pdb
