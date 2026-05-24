@@ -319,6 +319,78 @@ namespace SistemadeGestióndeBiblioteca
                 }
             } while (Opcion != 4);
         }
+        static void GestióndeLibros()
+        {
+            int opcion = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Gestión de Libros");
+                Console.WriteLine("1. Registro de nuevos libros");
+                Console.WriteLine("2. Búsqueda de libros por código");
+                Console.WriteLine("3. Listado completo de libros registrados");
+                Console.WriteLine("4. Eliminación de un libro");
+                Console.WriteLine("5. Volver al menú principal");
+                Console.Write("Seleccione una opción: ");
+                opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Registro de Nuevo Libro");
+                        if (cantLibros >= libros.Length)
+                        {
+                            Console.WriteLine("No hay espacio para más libros.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        libros[cantLibros].codigo = LeerCodigoLibro("Código (8 caracteres alfanuméricos): ");
+                        libros[cantLibros].titulo = LeerTexto("Título: ");
+                        libros[cantLibros].autor = LeerTexto("Autor: ");
+                        libros[cantLibros].editorial = LeerTexto("Editorial: ");
+                        libros[cantLibros].añoDePublicacion = LeerAño("Año de publicación: ");
+                        libros[cantLibros].cantidadDeEjemplaresDisponibles = LeerEjemplares("Cantidad de ejemplares disponibles: ");
+                        cantLibros++;
+                        GuardarDatos();
+                        Console.WriteLine("Libro registrado exitosamente.");
+                        AbrirArchivo(dataArchivo + "libros.csv");
+                        Console.ReadKey();
+                        break;
+
+                    case 2:
+                        Console.Clear();
+                        Console.WriteLine("Búsqueda de Libro por Código");
+                        Console.Write("Ingrese el código del libro: ");
+                        string codigoBuscar = Console.ReadLine();
+                        bool encontrado = false;
+                        for (int i = 0; i < cantLibros; i++)
+                        {
+                            if (libros[i].codigo == codigoBuscar)
+                            {
+                                Console.WriteLine("Código:       " + libros[i].codigo);
+                                Console.WriteLine("Título:       " + libros[i].titulo);
+                                Console.WriteLine("Autor:        " + libros[i].autor);
+                                Console.WriteLine("Editorial:    " + libros[i].editorial);
+                                Console.WriteLine("Año:          " + libros[i].añoDePublicacion);
+                                Console.WriteLine("Ejemplares:   " + libros[i].cantidadDeEjemplaresDisponibles);
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (!encontrado)
+                            Console.WriteLine("Libro no encontrado.");
+                        Console.ReadKey();
+                        break;
+
+                    case 5:
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Presione una tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                }
+            } while (opcion != 5);
+        }
     }
 
 }
