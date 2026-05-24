@@ -190,6 +190,74 @@ namespace SistemadeGestióndeBiblioteca
                 Console.WriteLine("Formato inválido. Use dd/mm/yyyy.");
             }
         }
+        static readonly string dataArchivo = "Data/";
+
+        static void CargarDatos()
+        {
+            if (!Directory.Exists(dataArchivo)) Directory.CreateDirectory(dataArchivo);
+
+            string rutaLibros = dataArchivo + "libros.csv";
+            if (File.Exists(rutaLibros))
+            {
+                foreach (string linea in File.ReadAllLines(rutaLibros))
+                {
+                    if (string.IsNullOrWhiteSpace(linea) || cantLibros >= libros.Length)
+                        continue;
+                    string[] p = linea.Split(';');
+                    if (p.Length < 6)
+                        continue;
+                    libros[cantLibros].codigo = p[0];
+                    libros[cantLibros].titulo = p[1];
+                    libros[cantLibros].autor = p[2];
+                    libros[cantLibros].editorial = p[3];
+                    if (int.TryParse(p[4], out int año))
+                        libros[cantLibros].añoDePublicacion = año;
+                    if (int.TryParse(p[5], out int ej))
+                        libros[cantLibros].cantidadDeEjemplaresDisponibles = ej;
+                    cantLibros++;
+                }
+            }
+
+            string rutaUsuarios = dataArchivo + "usuarios.txt";
+            if (File.Exists(rutaUsuarios))
+            {
+                foreach (string linea in File.ReadAllLines(rutaUsuarios))
+                {
+                    if (string.IsNullOrWhiteSpace(linea) || cantUsuarios >= usuarios.Length)
+                        continue;
+                    string[] p = linea.Split(';');
+                    if (p.Length < 6)
+                        continue;
+                    usuarios[cantUsuarios].carnet = p[0];
+                    usuarios[cantUsuarios].nombreCompleto = p[1];
+                    usuarios[cantUsuarios].carrera = p[2];
+                    usuarios[cantUsuarios].correoElectronico = p[3];
+                    if (int.TryParse(p[4], out int tel))
+                        usuarios[cantUsuarios].telefono = tel;
+                    usuarios[cantUsuarios].estado = p[5].Trim() == "1";
+                    cantUsuarios++;
+                }
+            }
+
+            string rutaPrestamos = dataArchivo + "prestamos.txt";
+            if (File.Exists(rutaPrestamos))
+            {
+                foreach (string linea in File.ReadAllLines(rutaPrestamos))
+                {
+                    if (string.IsNullOrWhiteSpace(linea) || cantPrestamos >= prestamos.Length)
+                        continue;
+                    string[] p = linea.Split(';');
+                    if (p.Length < 5)
+                        continue;
+                    prestamos[cantPrestamos].carneUsuario = p[0];
+                    prestamos[cantPrestamos].codigoLibro = p[1];
+                    prestamos[cantPrestamos].fechaPrestamo = p[2];
+                    prestamos[cantPrestamos].fechaDevolucionEstimada = p[3];
+                    prestamos[cantPrestamos].estado = p[4].Trim();
+                    cantPrestamos++;
+                }
+            }
+        }
     }
 
 }
