@@ -258,6 +258,37 @@ namespace SistemadeGestióndeBiblioteca
                 }
             }
         }
+        static void GuardarDatos()
+        {
+            if (!Directory.Exists(dataArchivo)) Directory.CreateDirectory(dataArchivo);
+
+            using (StreamWriter sw = new StreamWriter(dataArchivo + "libros.csv", false))
+                for (int i = 0; i < cantLibros; i++)
+                    sw.WriteLine($"{libros[i].codigo};{libros[i].titulo};{libros[i].autor};{libros[i].editorial};{libros[i].añoDePublicacion};{libros[i].cantidadDeEjemplaresDisponibles}");
+
+            using (StreamWriter sw = new StreamWriter(dataArchivo + "usuarios.txt", false))
+                for (int i = 0; i < cantUsuarios; i++)
+                    sw.WriteLine($"{usuarios[i].carnet};{usuarios[i].nombreCompleto};{usuarios[i].carrera};{usuarios[i].correoElectronico};{usuarios[i].telefono};{(usuarios[i].estado ? "1" : "0")}");
+
+            using (StreamWriter sw = new StreamWriter(dataArchivo + "prestamos.txt", false))
+                for (int i = 0; i < cantPrestamos; i++)
+                    sw.WriteLine($"{prestamos[i].carneUsuario};{prestamos[i].codigoLibro};{prestamos[i].fechaPrestamo};{prestamos[i].fechaDevolucionEstimada};{prestamos[i].estado}");
+
+            Console.WriteLine("Datos guardados correctamente.");
+        }
+
+        static void AbrirArchivo(string ruta)
+        {
+            try
+            {
+                string rutaCompleta = Path.GetFullPath(ruta);
+                if (File.Exists(rutaCompleta))
+                    Process.Start(new ProcessStartInfo(rutaCompleta) { UseShellExecute = true });
+                else
+                    Console.WriteLine("Archivo no encontrado: " + rutaCompleta);
+            }
+            catch (Exception ex) { Console.WriteLine("Error al abrir archivo: " + ex.Message); }
+        }
     }
 
 }
