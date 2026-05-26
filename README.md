@@ -24,3 +24,4 @@ requisitos: tener git
 -luego entrar en el proyecto que se quiere ejecutar y darle clic al Program.cs, y solo se abrira el vs.
 
 LINK DEL VIDEO
+https://drive.google.com/file/d/1OrezYYa0keXM6GigaKuZkPHUBJfdhWie/view?usp=drive_link
